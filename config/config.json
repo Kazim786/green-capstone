@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "DC202012!",
+    "database": "postgres",
+    "host": "the-users.cucxjwlvh3id.us-east-2.rds.amazonaws.com",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": "DC202012!",
+    "database": "postgres",
+    "host": "the-users.cucxjwlvh3id.us-east-2.rds.amazonaws.com",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "postgres",
+    "password": "DC202012!",
+    "database": "postgres",
+    "host": "the-users.cucxjwlvh3id.us-east-2.rds.amazonaws.com",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
