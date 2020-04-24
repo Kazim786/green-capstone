@@ -16,19 +16,24 @@ db.oneOrNone('SELECT id FROM user WHERE username = $1', [username])
 })
 
 //Username is already taken should be on the front end
-//res.status - 422 error
-//chain on send function to that. And in that send you send back the error
+//res.status - 422 error -IMPORTANT
+//chain on send function to that. And in that send function you send back the error -IMPORTANT
 //make a table to save to global state - shopping list
-//wishlist/favorites table - store unique ID of the item (like a UPC)
+//wishlist/favorites table - store unique ID of the item (like a UPC) -NO
 //use sequelize or pg promise
-//figure out how the API works - you can make a call from react or node
-//insert a new favorite to the table - primary key, unique id, user.id (foreign key to user table)
-//delete route to delete the favorite
-//delete and insertion are 2 different post routes
-//posts request will send a new favorite
-//use bodyparser to make new insertion into the table.
-//review how carts work
-//order history (optional) - just pull old receipts
-//table for orders - order id, user id, 
-//purchase table, userid, order id, 
+//figure out how the API works - you can make a call from react or node (foorkan)
+//insert a new favorite to the table - primary key, unique id, user.id (foreign key to user table) -no
+//delete route to delete the favorite -no
+//delete and insertion are 2 different post routes -no
+//posts request will send a new favorite -no
+
+//deleting stuff from shop list once those things have been purchased -IMPORTANT
+//use bodyparser to make new insertion into the table. -IMPORTANT
+
+
+
+//review how carts work -NO
+//order history (optional) - just pull old receipts-NO
+//table for orders - order id, user id, -NO
+//purchase table, userid, order id, -NO
 
