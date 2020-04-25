@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     // associations can be defined here
+    //example:
+    //items.associate = function(models) {
+    // associations can be defined here
+    // items.belongsTo(models.donation, { foreignKey: 'id'});
   };
   return User;
 };
