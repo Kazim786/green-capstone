@@ -6,6 +6,7 @@ const app = express()
 const route = require('./routes/stores')
 const delrouter = require('./routes/del-items')
 app.use(route)
+app.use(delrouter)
 // db.oneOrNone('SELECT id FROM user WHERE username = $1', [username])
 // .then((user) => {
 //     if(user) {

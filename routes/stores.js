@@ -7,8 +7,7 @@ router.get("/stores",(req, res) => {
         res.json(data)
     }
     )
-}
-)
+})
 module.exports = router 
 //start writing routes
 //send back responses as json 
