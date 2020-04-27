@@ -2,13 +2,10 @@ const delrouter = require("express").Router()
 
 const models = require('../models')
 
-delrouter.get("/del-items",(req, res) => {
-    models.shoppingLists.destroy('ItemName').then((data) => {
-        res.json(data)
-    }
-    )
-}
-)
-//deletes the item from the list once it has been bought by the user
-//does the way i wrote it delete the entire column? I dont want that to happen
+delrouter.get("/del-items/:id",(req, res) => {
+    models.shoppingLists.findOne({where: {id: req.params.id }}).then( async (data) => {
+        res.json(await data.destroy())
+    })
+})
+// this deletes an item from the shoppingLists
 module.exports = delrouter 
