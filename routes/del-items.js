@@ -1,8 +1,8 @@
-const router = require("express").Router()
+const delrouter = require("express").Router()
 
 const models = require('../models')
 
-router.get("/manip-users",(req, res) => {
+router.get("/del-items",(req, res) => {
     models.shoppingLists.destroy('ItemName').then((data) => {
         res.json(data)
     }
@@ -10,4 +10,4 @@ router.get("/manip-users",(req, res) => {
 }
 )
 //deletes the item from the list once it has been bought by the user
-module.exports = router 
+module.exports = delrouter 

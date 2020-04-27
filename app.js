@@ -4,7 +4,7 @@ const db = pgp(connectionString)
 const express = require('express')
 const app = express()
 const route = require('./routes/stores')
-const route = require('./routes/del-items')
+const delrouter = require('./routes/del-items')
 app.use(route)
 // db.oneOrNone('SELECT id FROM user WHERE username = $1', [username])
 // .then((user) => {
