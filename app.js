@@ -3,10 +3,13 @@ const connectionString = 'postgres://localhost:5432/postgres'
 const db = pgp(connectionString)
 const express = require('express')
 const app = express()
+
 const route = require('./routes/stores')
 const delrouter = require('./routes/del-items')
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(route)
 app.use(delrouter)
+
 // db.oneOrNone('SELECT id FROM user WHERE username = $1', [username])
 // .then((user) => {
 //     if(user) {

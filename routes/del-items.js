@@ -3,7 +3,7 @@ const delrouter = require("express").Router()
 const models = require('../models')
 
 delrouter.get("/del-items/:id",(req, res) => {
-    models.shoppingLists.findOne({where: {id: req.params.id }}).then( async (data) => {
+    models.shoppingList.findOne({where: {id: req.params.id }}).then( async (data) => {
         res.json(await data.destroy())
     })
 })

@@ -3,7 +3,7 @@ const router = require("express").Router()
 const models = require('../models')
 
 router.get("/stores",(req, res) => {
-    models.User.findAll().then((data) => {
+    models.Store.findAll().then((data) => {
         res.json(data)
     }
     )
