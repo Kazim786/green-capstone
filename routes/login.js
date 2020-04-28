@@ -1,5 +1,8 @@
 //checking password
-var bodyParser = require('body-parser')
+const models = require('../models')
+ var bodyParser = require('body-parser') //put this in the app.js like azam did - update, brought it back to login like i did before
+//value not being used? Shouldnt it be getting used because of what we did with urlencoded in app.js?
+app.use(bodyParser.urlencoded({extended: true})) //i brought this here - ephriam had it in app.js
 const loginrouter = require("express").Router()
 
 const models = require('../models')
@@ -9,8 +12,13 @@ router.get("/login",(req, res) => {
         res.json(data)
     })
 
+    //GET THIS CODE BELOW THAT IS COMMENTED CHECKED
+    // router.get('/signup', (req, res) => {
+    //     res.render('signup') //idk if this was necessary. Should this be put after router.post for signup?
+    // }
+    // )
 
-    router.post("/signup",(req, res) => {
+    router.post("/signup",async (req, res) => {
         models.User.create({
             name: req.body.name,
             email: req.body.email ,
@@ -23,7 +31,60 @@ router.get("/login",(req, res) => {
             res.json(data)
         })
 
+        let persistedUser = await models.User.findOne({
+            where: {
+                username: username
+                
+            }
+        })
+        if(persistedUser == null) {
+            let user = models.User.build({
+                username: username,
+                password: password
+            })
+            
+            let takenUsername = await user.save()
+            if(takenUsername != null){
+                res.redirect('/login')
+                
+            } else{
+                res.render('/register', {message: 'User already exists'})
+            }
+        } else {
+            res.render('/register', {message: "Username is already in use"})
+        }
+        // below i will write the same logic as above but for EMAIL:
+        let persistedEmail = await models.User.findOne({
+            where: {
+                email: email
+                
+            }
+        })
+        if(persistedEmail == null) {
+            let user = models.User.build({
+                email: email,
+                username: username,
+                password: password
+                //should i remove username and pass?
+            })
+            
+            let takenEmail = await user.save()
+            if(takenEmail != null){
+                res.redirect('/login')
+                
+            } else{
+                res.render('/register', {message: 'Email already exists'})
+            }
+        } else {
+            res.render('/register', {message: "Email is already in use"})
+        }
+
 })
+
+router.get('/signup', (req, res) => {
+        res.render('signup') //idk if this was necessary. Should this be put after router.post for signup?
+    }
+    )
 module.exports = loginrouter 
 //write logic for hashing THE PASSWORD for the sign up 
 //sign up will be for valid email (email not in use already), and they cant use a username which is taken. HASH THE PASSWORD 
