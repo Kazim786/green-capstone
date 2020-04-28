@@ -3,8 +3,7 @@ const connectionString = 'postgres://localhost:5432/postgres'
 const db = pgp(connectionString)
 const express = require('express')
 const app = express()
-var bcrypt = require('bcrypt')
-const saltRounds = 10;
+
 const route = require('./routes/stores')
 const delrouter = require('./routes/del-items')
 // var bodyParser = require('body-parser')

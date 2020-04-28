@@ -1,5 +1,7 @@
 //checking password
 const models = require('../models')
+const bcrypt = require('bcrypt')
+const saltRounds = 10;
  var bodyParser = require('body-parser') //put this in the app.js like azam did - update, brought it back to login like i did before
 //value not being used? Shouldnt it be getting used because of what we did with urlencoded in app.js?
 app.use(bodyParser.urlencoded({extended: true})) //i brought this here - ephriam had it in app.js
@@ -38,18 +40,38 @@ router.get("/login",(req, res) => {
             }
         })
         if(persistedUser == null) {
-            let user = models.User.build({
-                username: username,
-                password: password
-            })
-            
-            let takenUsername = await user.save()
+
+            bcrypt.hash(password, saltRounds, async(error, hash) => {
+                if(error){
+                    res.render('/register', {message: 'Error creating user!'})
+
+                } else {
+                    let user = models.User.build({
+                        username: username,
+                        password: hash
+                    })
+                    let takenUsername = await user.save()
             if(takenUsername != null){
                 res.redirect('/login')
                 
             } else{
                 res.render('/register', {message: 'User already exists'})
             }
+                }
+            })
+
+            // let user = models.User.build({
+            //     username: username,
+            //     password: password
+            // })
+            
+            // let takenUsername = await user.save()
+            // if(takenUsername != null){
+            //     res.redirect('/login')
+                
+            // } else{
+            //     res.render('/register', {message: 'User already exists'})
+            // }
         } else {
             res.render('/register', {message: "Username is already in use"})
         }
