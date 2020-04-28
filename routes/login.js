@@ -4,10 +4,46 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10;
  var bodyParser = require('body-parser') //put this in the app.js like azam did - update, brought it back to login like i did before
 //value not being used? Shouldnt it be getting used because of what we did with urlencoded in app.js?
-app.use(bodyParser.urlencoded({extended: true})) //i brought this here - ephriam had it in app.js
+login.use(bodyParser.urlencoded({extended: true})) //i brought this here - ephriam had it in app.js
+login.use(session({
+    secret: 'somesecret',
+    resave: true,
+    saveUninitialized: false
+}))
+
+//changed app.use to login.use - ask ephriam to check
 const loginrouter = require("express").Router()
+const session = require('express-session')
 
 const models = require('../models')
+
+router.post('/login', async (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+    let user = await models.User.findOne({
+        where: {
+            username: username, 
+        }
+    })
+    if(user != null) {
+        bcrypt.compare(password, user.password, (error, result) => {
+            if(result){
+                //create session
+                if(req.session) {
+                    req.session.user = {userId: user.id}
+                    res.redirect('/homepage')
+                }
+            } else {
+                res.render('login', {message: 'Incorrect username or password'})
+            }
+
+        })
+
+    } else { //if user is null
+        res.render('/login' {message: 'Incorrect username or password'})
+    }
+}
+)
 
 router.get("/login",(req, res) => {
     models.User.findAll().then((data) => {
