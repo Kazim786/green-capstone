@@ -6,10 +6,12 @@ const app = express()
 
 const route = require('./routes/stores')
 const delrouter = require('./routes/del-items')
+const loginRouter = require('./routes/login')
 // var bodyParser = require('body-parser')
 // app.use(bodyParser.urlencoded({extended: true}))
 app.use(route)
 app.use(delrouter)
+app.use(loginRouter)
 
 // db.oneOrNone('SELECT id FROM user WHERE username = $1', [username])
 // .then((user) => {
