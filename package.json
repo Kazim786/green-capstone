@@ -1,7 +1,6 @@
 {
   "name": "store",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,8 +16,15 @@
   },
   "homepage": "https://github.com/Kazim786/green-capstone#readme",
   "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "pg": "^8.0.3",
+    "pg-promise": "^10.5.2",
     "sequelize": "^5.21.6"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
