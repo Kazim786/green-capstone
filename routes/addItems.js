@@ -4,9 +4,6 @@ const models = require('../models')
 
 delrouter.get("/del-items/:id",(req, res) => {
     models.shoppingList.findOne({where: {id: req.params.id }}).then( async (data) => {
-        res.json(await data.destroy())
+        res.json(await data.create())
     })
 })
-// this deletes an item from the shoppingLists
-//to add you do data.create
-module.exports = delrouter 
